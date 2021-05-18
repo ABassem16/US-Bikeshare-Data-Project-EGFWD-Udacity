@@ -90,9 +90,9 @@ def time_stats(df):
         df['hour']=df['Start Time'].dt.hour
         mostCommonHour=df['hour'].mode()[0]
         if mostCommonHour>12:    
-            print('Most Common Hour: ' , mostCommonHour-12 , ':00 PM')
+            print('Most Common Hour: ' , mostCommonHour-12, ':00 PM')
         else:
-            print('Most Common Hour: ' , mostCommonHour , ':00 AM')
+            print('Most Common Hour: ' , mostCommonHour, ':00 AM')
     else:
         print("DataFrame is empty!")   
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -166,6 +166,24 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def dipslay_data(df):
+    """displays rows based on user's needs"""
+    while True:
+        viewData=input("\nWould you like to view 5 rows from trips data? Enter Yes or No\n").title()
+        if viewData=="Yes" or viewData=="No":
+            break
+        else:
+            continue
+    loc=0
+    while viewData=='Yes':
+        print(df.iloc[loc:loc+5])
+        loc+=5
+        while True:
+            viewData=input("\nWould you like to view 5 rows from trips data? Enter Yes or No\n").title()
+            if viewData=="Yes" or viewData=="No":
+                break
+            else:
+                continue
 
 def main():
     while True:
@@ -176,6 +194,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        dipslay_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
